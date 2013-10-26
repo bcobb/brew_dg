@@ -1,0 +1,3 @@
+#!/bin/bash
+
+irb -I lib -r brew_dg
