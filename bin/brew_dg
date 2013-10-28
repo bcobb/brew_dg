@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+
+$:.unshift(
+  File.expand_path(File.join(File.expand_path(__FILE__), '..', '..', 'lib'))
+)
+
+require 'brew_dg/cli'
+
+BrewDG::CLI.new(ARGV.dup).execute!

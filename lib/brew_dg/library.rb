@@ -12,7 +12,7 @@ module BrewDG
         %x(brew list).lines.map(&:strip)
       end
       @relevant_dependency_types = options.fetch(:relevant_dependency_types) do
-        [:build, :required, :recommended, :optional]
+        [:required, :recommended]
       end
     end
 
@@ -60,6 +60,28 @@ module BrewDG
         Package.new(name: name, dependencies: dependencies).tap do |package|
           @package_cache.store(name, package)
         end
+      end
+    end
+
+    def installation_order
+      order = (graph.vertices - graph.isolated_vertices).map do |package|
+        installation_order_of(package)
+      end
+
+      [graph.isolated_vertices, order].flatten.reduce([]) do |install, package|
+        install | [package.name]
+      end
+    end
+
+    def installation_order_of(package)
+      if graph.neighborhood(package, :out).size.zero?
+        [package]
+      else
+        dependency_order = graph.neighborhood(package, :out).map do |package|
+          installation_order_of(package)
+        end
+
+        dependency_order << package
       end
     end
 

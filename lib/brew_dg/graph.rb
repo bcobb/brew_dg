@@ -32,39 +32,44 @@ module BrewDG
     def visualization
       visualization = GraphViz.new(:G)
 
-      lonely_nodes = vertices.select do |vertex|
-        in_degree(vertex).zero? && out_degree(vertex).zero?
-      end
-
-      lonely_nodes.each do |node|
-        if node.name == 'node'
-          visualization.add_nodes('nodejs')
-        else
-          visualization.add_nodes(node.name)
-        end
+      isolated_vertices.each do |vertex|
+        visualization.add_nodes(sanitized_name(vertex.name))
       end
 
       edges.reduce(visualization) do |visualization, edge|
         manifest = edge.to_a.last
 
         left, right = edge.to_a.first(2).map do |package|
-          visualization.add_nodes(package.name)
+          visualization.add_nodes(sanitized_name(package.name))
         end
 
-        edge_options = {
-          required: { color: 'black' },
-          recommended:  { color: 'gray20' },
-          build: { color: 'cadetblue3' },
-          optional: { style: 'dotted' }
-        }.fetch(manifest.type)
-
-        visualization.add_edges(left, right, edge_options)
+        visualization.add_edges(left, right, edge_options(manifest.type))
         visualization
+      end
+    end
+
+    def isolated_vertices
+      vertices.select do |vertex|
+        in_degree(vertex).zero? && out_degree(vertex).zero?
       end
     end
 
     def __getobj__ ; @graph ; end
     def __setobj__(new_graph) ; @graph = new_graph ; end
+
+    private
+   
+    def sanitized_name(name)
+      name == 'node' ? 'nodejs' : name
+    end
+
+    def edge_options(type)
+      edge_options = {
+        recommended:  { arrowhead: 'empty' },
+        optional: { style: 'dotted' },
+        build: { style: 'dotted', arrowhead: 'tee' }
+      }.fetch(type, {})
+    end
 
   end
 end
