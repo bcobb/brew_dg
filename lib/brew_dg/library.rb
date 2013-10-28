@@ -64,11 +64,14 @@ module BrewDG
     end
 
     def installation_order
-      order = (graph.vertices - graph.isolated_vertices).map do |package|
+      order = graph.vertices.map do |package|
         installation_order_of(package)
       end
 
-      [graph.isolated_vertices, order].flatten.reduce([]) do |install, package|
+      # Array#uniq which will preserve the first of any repeated elements. If
+      # Array#uniq does this, I would prefer to not rely on that implementation
+      # detail.
+      order.flatten.reduce([]) do |install, package|
         install | [package.name]
       end
     end
@@ -77,11 +80,11 @@ module BrewDG
       if graph.neighborhood(package, :out).size.zero?
         [package]
       else
-        dependency_order = graph.neighborhood(package, :out).map do |package|
-          installation_order_of(package)
+        dependency_order = graph.neighborhood(package, :out).map do |dependency|
+          installation_order_of(dependency)
         end
 
-        dependency_order << package
+        dependency_order + [package]
       end
     end
 
