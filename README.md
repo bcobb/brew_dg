@@ -21,7 +21,7 @@ that a given package will not be installed until its Recommended and
 Required dependencies have been installed.
 
 If no options or pacakges are given, brew_dg displays any homebrew
-packages you've installed, along with an uninstalled Recommended
+packages you've installed, along with any uninstalled, Recommended
 dependencies in an order such that a package will not be installed until
 its dependencies have been installed.
 
