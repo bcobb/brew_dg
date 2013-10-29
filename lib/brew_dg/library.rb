@@ -32,10 +32,10 @@ module BrewDG
           package.dependencies.of_type(type)
         end
 
-        manifests.reduce(graph) do |graph, manifest|
-          manifest.dependencies.reduce(graph) do |graph, dependency|
-            graph.add_edge!(package, dependency, manifest)
-            graph.add_edges!(*subgraph(dependency.name).edges)
+        manifests.reduce(graph) do |manifest_graph, manifest|
+          manifest.dependencies.reduce(manifest_graph) do |subgraph, dependency|
+            subgraph.add_edge!(package, dependency, manifest)
+            subgraph.add_edges!(*subgraph(dependency.name).edges)
           end
         end
       end
@@ -43,11 +43,7 @@ module BrewDG
 
     def package(name)
       @package_cache.fetch(name) do
-        manifests = %x(brew info #{name}).lines.map do |line|
-          DependencyManifest.from_output(line)
-        end
-
-        manifests.compact!
+        manifests = DependencyManifest.for_package(name)
 
         manifests.map! do |manifest|
           packages = manifest.dependencies.map(&method(:package))

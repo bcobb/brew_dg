@@ -6,6 +6,10 @@ module BrewDG
 
     DEPENDENCY_TYPES = %w(Build Required Recommended Optional)
 
+    def self.for_package(package)
+      %x(brew info #{package}).lines.map(&method(:from_output)).compact
+    end
+
     def self.from_output(line)
       type_match = line.match(/^(\w+):/)
       type = type_match && type_match.captures.first
