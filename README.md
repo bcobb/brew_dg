@@ -34,14 +34,12 @@ preceeding description:
     -o [file]
         Draw graph, and write it to file. Directed edges are read as "depends
         on." If given a directory $DIR, the file will be located at
-        $DIR/library.png. If given no argument, the file will be written to
-        STDOUT. See Graph section for stylistic details.
+        $DIR/library.png. See Graph section for stylistic details.
 
     -O [file]
         Draw inverted graph, and write it to file. Directed edges are read as
         "is a dependency of." If given a directory $DIR, the file will be
-        located at $DIR/library.png. If given no argument, the file will be
-        written to STDOUT. See Graph section for stylistic details.
+        located at $DIR/library.png. See Graph section for stylistic details.
 
     -t types
         Display only dependencies of the comma-delimited types specified. e.g.
