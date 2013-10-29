@@ -32,12 +32,12 @@ module BrewDG
       library = Library.new(options)
 
       if configuration[:destination]
-        graph = library.graph.reversal
+        graph = library.graph
 
         if configuration[:inverted]
-          visualization = graph.visualization
-        else
           visualization = graph.reversal.visualization
+        else
+          visualization = graph.visualization
         end
 
         visualization.output(png: configuration[:destination])
