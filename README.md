@@ -28,24 +28,24 @@ its dependencies have been installed.
 The following options allow users to configure and tweak the details of the
 preceeding description:
 
--a
-    Display all dependencies, including Optional and Build dependencies.
+    -a
+        Display all dependencies, including Optional and Build dependencies.
 
--o [file]
-    Draw graph, and write it to file. Directed edges are read as "depends
-    on." If given a directory $DIR, the file will be located at
-    $DIR/library.png. If given no argument, the file will be written to
-    STDOUT. See Graph section for stylistic details.
+    -o [file]
+        Draw graph, and write it to file. Directed edges are read as "depends
+        on." If given a directory $DIR, the file will be located at
+        $DIR/library.png. If given no argument, the file will be written to
+        STDOUT. See Graph section for stylistic details.
 
--O [file]
-    Draw inverted graph, and write it to file. Directed edges are read as
-    "is a dependency of." If given a directory $DIR, the file will be
-    located at $DIR/library.png. If given no argument, the file will be
-    written to STDOUT. See Graph section for stylistic details.
+    -O [file]
+        Draw inverted graph, and write it to file. Directed edges are read as
+        "is a dependency of." If given a directory $DIR, the file will be
+        located at $DIR/library.png. If given no argument, the file will be
+        written to STDOUT. See Graph section for stylistic details.
 
--t types
-    Display only dependencies of the comma-delimited types specified. e.g.
-    `-t Recommended,Optional'
+    -t types
+        Display only dependencies of the comma-delimited types specified. e.g.
+        `-t Recommended,Optional'
 
 ## Graph
 
