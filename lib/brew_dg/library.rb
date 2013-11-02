@@ -18,7 +18,10 @@ module BrewDG
 
     def graph
       @packages.reduce(Graph.new) do |graph, name|
-        graph.add_edges!(*subgraph(name).edges)
+        subgraph = subgraph(name)
+
+        graph.add_edges!(*subgraph.edges)
+        graph.add_vertices!(*subgraph.vertices)
       end
     end
 
