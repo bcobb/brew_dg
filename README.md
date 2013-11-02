@@ -12,6 +12,8 @@ BrewDG allows you to visualize your homebrew package dependencies, and can give 
 
 ## Examples
 
+`brew_dg` is pretty slow since it's issuing and parsing the output of `brew` commands. Which is to say, you may want to have a beverage to sip while using it, particularly on a large number of packages.
+
 1. List packages plus their recommended dependencies. This is what compelled me to write `brew_dg`.
 
     ```
@@ -21,23 +23,7 @@ BrewDG allows you to visualize your homebrew package dependencies, and can give 
 
     ossp-uuid is recommended for postgresql, readline is recommended for sqlite. Note that readline is required for postgresql; it seems like it would be interesting to factor that into the final list of packages.
 
-2. Visualize homebrew dependencies. See [Graph](#graph) for visual details. (requires graphviz, and a bit of time):
-
-    ```
-    $ brew_dg -o library.png
-    $ open library.png
-    ```
-
-3. Visualize a package's recommended and required dependencies (as well as their dependencies)
-
-    ```
-    $ brew_dg -o postgis.png postgis
-    $ open postgis.png
-    ```
-
-    [![](http://f.cl.ly/items/0i041b0u1F0e3n153Z1z/postgis.png)](http://f.cl.ly/items/3g2m3y2e150X1w2d263s/postgis.png)
-
-4. List all of a package's dependencies, including Optional and Build dependencies.
+2. List all of a package's dependencies, including Optional and Build dependencies.
 
    ```
    $ brew_dg -a postgis
@@ -45,6 +31,22 @@ BrewDG allows you to visualize your homebrew package dependencies, and can give 
        lzlib libgeotiff sqlite freexl libxml2 pkg-config libspatialite cmake \
        mysql gdal autoconf automake libtool gpp postgis
    ```
+
+3. Visualize homebrew dependencies. See [Graph](#graph) for visual details. (Note that these visualizations require graphviz):
+
+    ```
+    $ brew_dg -o library.png
+    $ open library.png
+    ```
+
+4. Visualize a package's recommended and required dependencies (as well as their dependencies)
+
+    ```
+    $ brew_dg -o postgis.png postgis
+    $ open postgis.png
+    ```
+
+    [![](http://f.cl.ly/items/0i041b0u1F0e3n153Z1z/postgis.png)](http://f.cl.ly/items/3g2m3y2e150X1w2d263s/postgis.png)
 
 5. Visualize all of a package's dependencies, including Optional and Build dependencies
 
