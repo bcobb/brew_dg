@@ -1,5 +1,6 @@
 require 'brew_dg/dependency_manifest'
 require 'brew_dg/graph'
+require 'brew_dg/graph_installation'
 require 'brew_dg/package'
 require 'brew_dg/queryable_dependencies'
 
@@ -24,6 +25,13 @@ module BrewDG
         graph.add_vertices!(*subgraph.vertices)
       end
     end
+
+    def installation_order
+      installation = GraphInstallation.new(graph)
+      installation.list.map(&:to_s)
+    end
+
+    private
 
     def subgraph(name)
       package = package(name)
@@ -60,11 +68,6 @@ module BrewDG
           @package_cache.store(name, package)
         end
       end
-    end
-
-    def installation_order
-      installation = GraphInstallation.new(graph)
-      installation.list.map(&:to_s)
     end
 
   end
