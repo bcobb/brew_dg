@@ -21,7 +21,7 @@ BrewDG allows you to visualize your homebrew package dependencies. It can also t
     > git readline ossp-uuid postgresql sqlite redis
     ```
 
-    We've added two packages to the initial list: `ossp-uuid`, which is recommended for `postgresql`, and `readline`, which is recommended for `sqlite`. Note that `readline` is in fact _required_ for postgresql; perhaps in the future we will take that into ordering consideration.
+    We've added two packages to the initial list: `ossp-uuid`, which is recommended for `postgresql`, and `readline`, which is recommended for `sqlite`. Note that `readline` is in fact _required_ for `postgresql`; perhaps in the future we will take that into ordering consideration.
 
 2. List all of a package's dependencies, including Optional and Build dependencies.
 
