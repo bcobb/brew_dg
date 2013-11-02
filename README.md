@@ -22,6 +22,31 @@ BrewDG allows you to visualize your homebrew package dependencies, and can give 
     $ open library.png
     ```
 
+3. Visualize a package's recommended and required dependencies (as well as their dependencies)
+
+    ```
+    $ brew_dg -o postgis.png postgis
+    $ open postgis.png
+    ```
+
+    [![](http://f.cl.ly/items/0i041b0u1F0e3n153Z1z/postgis.png)](http://f.cl.ly/items/3g2m3y2e150X1w2d263s/postgis.png)
+
+4. List all of a package's dependencies, including Optional and Build dependencies.
+
+   ```
+   $ brew_dg -a postgis
+   > readline ossp-uuid postgresql proj geos json-c libpng jpeg giflib libtiff \
+       lzlib libgeotiff sqlite freexl libxml2 pkg-config libspatialite cmake \
+       mysql gdal autoconf automake libtool gpp postgis
+   ```
+
+5. Visualize all of a package's dependencies, including Optional and Build dependencies
+
+  ```
+  $ brew_dg -a -o postgis.png postgis
+  $ open postgis.png
+  ```
+
 ## Installation
 
 `gem install brew_dg`
