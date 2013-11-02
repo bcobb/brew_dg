@@ -10,6 +10,10 @@ module BrewDG
       attribute :dependencies, QueryableDependencies
     end
 
+    def to_s
+      name
+    end
+
   end
 end
 

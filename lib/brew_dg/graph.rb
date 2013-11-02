@@ -9,17 +9,17 @@ module BrewDG
       visualization = GraphViz.new(:G)
 
       isolated_vertices.each do |vertex|
-        visualization.add_nodes(vertex.name)
+        visualization.add_nodes(vertex.to_s)
       end
 
       edges.reduce(visualization) do |visualization, edge|
         manifest = edge.to_a.last
 
         left, right = edge.to_a.first(2).map do |package|
-          visualization.add_nodes(package.name)
+          visualization.add_nodes(package.to_s)
         end
 
-        visualization.add_edges(left, right, edge_options(manifest.type))
+        visualization.add_edges(left, right, edge_options(manifest))
         visualization
       end
     end
@@ -32,12 +32,18 @@ module BrewDG
 
     private
    
-    def edge_options(type)
-      edge_options = {
-        recommended:  { arrowhead: 'empty' },
-        optional: { style: 'dotted' },
-        build: { style: 'dotted', arrowhead: 'tee' }
-      }.fetch(type, {})
+    def edge_options(manifest)
+      if manifest
+        type = manifest.type
+
+        edge_options = {
+          recommended:  { arrowhead: 'empty' },
+          optional: { style: 'dotted' },
+          build: { style: 'dotted', arrowhead: 'tee' }
+        }.fetch(type, {})
+      else
+        {}
+      end
     end
 
   end

@@ -1,3 +1,4 @@
+require 'brew_dg/dependency_manifest'
 require 'brew_dg/queryable_dependencies'
 
 module BrewDG
@@ -5,8 +6,8 @@ module BrewDG
   describe QueryableDependencies do
 
     it 'knows which manifest is the build manifest' do
-      build = double('DependencyManifest', :type => :build)
-      required = double('DependencyManifest', :type => :required)
+      build = DependencyManifest.new(type: :build)
+      required = DependencyManifest.new(type: :required)
 
       queryable = QueryableDependencies.new([build, required])
 
@@ -14,8 +15,8 @@ module BrewDG
     end
 
     it 'knows which manifest is the required manifest' do
-      build = double('DependencyManifest', :type => :build)
-      required = double('DependencyManifest', :type => :required)
+      build = DependencyManifest.new(type: :build)
+      required = DependencyManifest.new(type: :required)
 
       queryable = QueryableDependencies.new([build, required])
 
@@ -23,8 +24,8 @@ module BrewDG
     end
 
     it 'knows which manifest is the recommended manifest' do
-      optional = double('DependencyManifest', :type => :optional)
-      recommended = double('DependencyManifest', :type => :recommended)
+      optional = DependencyManifest.new(type: :optional)
+      recommended = DependencyManifest.new(type: :recommended)
 
       queryable = QueryableDependencies.new([optional, recommended])
 
@@ -32,8 +33,8 @@ module BrewDG
     end
 
     it 'knows which manifest is the optional manifest' do
-      optional = double('DependencyManifest', :type => :optional)
-      recommended = double('DependencyManifest', :type => :recommended)
+      optional = DependencyManifest.new(type: :optional)
+      recommended = DependencyManifest.new(type: :recommended)
 
       queryable = QueryableDependencies.new([optional, recommended])
 

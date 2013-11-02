@@ -63,28 +63,8 @@ module BrewDG
     end
 
     def installation_order
-      order = graph.vertices.map do |package|
-        installation_order_of(package)
-      end
-
-      # Array#uniq which will preserve the first of any repeated elements. If
-      # Array#uniq does this, I would prefer to not rely on that implementation
-      # detail.
-      order.flatten.reduce([]) do |install, package|
-        install | [package.name]
-      end
-    end
-
-    def installation_order_of(package)
-      if graph.neighborhood(package, :out).size.zero?
-        [package]
-      else
-        dependency_order = graph.neighborhood(package, :out).map do |dependency|
-          installation_order_of(dependency)
-        end
-
-        dependency_order + [package]
-      end
+      installation = GraphInstallation.new(graph)
+      installation.list.map(&:to_s)
     end
 
   end
