@@ -4,6 +4,22 @@ Homebrew Dependency Graphs.
 
 BrewDG allows you to visualize your homebrew package dependencies, and can give you a list of packages in an order which minimizes the amount of dependency installation required by subsequent packages.
 
+## Examples
+
+1. Add recommended packages to a homebrew stack:
+
+    ```
+    $ brew_dg git postgresql sqlite redis
+    > git readline ossp-uuid postgresql sqlite redis
+    ```
+
+2. Visualize homebrew dependencies (requires graphviz, and a bit of time):
+
+    ```
+    $ brew_dg -o library.png
+    $ open library.png
+    ```
+
 ## Installation
 
 `gem install brew_dg`
