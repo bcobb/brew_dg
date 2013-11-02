@@ -4,6 +4,12 @@ Homebrew Dependency Graphs.
 
 BrewDG allows you to visualize your homebrew package dependencies, and can give you a list of packages in an order which minimizes the amount of dependency installation required by subsequent packages.
 
+## Installation
+
+`gem install brew_dg`
+
+**N.B.**: this is not the sort of tool that should be distributed as a gem. See [Gary Bernhardt's comment](https://github.com/garybernhardt/selecta#installation) on this in the `selecta` README. For now, while this tool has a couple of bulky dependencies, it'll remain a gem.
+
 ## Examples
 
 1. List packages plus their recommended dependencies. This is what compelled me to write `brew_dg`.
