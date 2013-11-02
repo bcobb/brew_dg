@@ -2,13 +2,13 @@
 
 Homebrew Dependency Graphs.
 
-BrewDG allows you to visualize your homebrew package dependencies, and can give you a list of packages in an order which minimizes the amount of dependency installation required by subsequent packages.
+BrewDG allows you to visualize your homebrew package dependencies. It can also take a list of packages, and give you those packages, with each package preceeded by its dependencies (and its dependencies will be preceeded by _its_ dependencies, and so forth).
 
 ## Installation
 
 `gem install brew_dg`
 
-**N.B.**: this is not the sort of tool that should be distributed as a gem. See [Gary Bernhardt's comment](https://github.com/garybernhardt/selecta#installation) on this in the `selecta` README. For now, while this tool has a couple of bulky dependencies, it'll remain a gem.
+**N.B.**: this is not the sort of tool that should be distributed as a gem. See [Gary Bernhardt's comment](https://github.com/garybernhardt/selecta#installation) on this in the `selecta` README. Alas, while `brew_dg` has a couple of bulky dependencies, it'll remain a gem.
 
 ## Examples
 
@@ -21,7 +21,7 @@ BrewDG allows you to visualize your homebrew package dependencies, and can give 
     > git readline ossp-uuid postgresql sqlite redis
     ```
 
-    ossp-uuid is recommended for postgresql, readline is recommended for sqlite. Note that readline is required for postgresql; it seems like it would be interesting to factor that into the final list of packages.
+    We've added two packages to the initial list: `ossp-uuid`, which is recommended for `postgresql`, and `readline`, which is recommended for `sqlite`. Note that `readline` is in fact _required_ for postgresql; perhaps in the future we will take that into ordering consideration.
 
 2. List all of a package's dependencies, including Optional and Build dependencies.
 
