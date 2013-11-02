@@ -15,7 +15,7 @@ BrewDG allows you to visualize your homebrew package dependencies, and can give 
 
     ossp-uuid is recommended for postgresql, readline is recommended for sqlite. Note that readline is required for postgresql; it seems like it would be interesting to factor that into the final list of packages.
 
-2. Visualize homebrew dependencies (requires graphviz, and a bit of time):
+2. Visualize homebrew dependencies. See [Graph](#graph) for visual details. (requires graphviz, and a bit of time):
 
     ```
     $ brew_dg -o library.png
