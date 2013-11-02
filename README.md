@@ -2,7 +2,7 @@
 
 Homebrew Dependency Graphs.
 
-BrewDG allows you to visualize your homebrew package dependencies. It can also take a list of packages, and give you those packages, with each package preceeded by its dependencies (and its dependencies will be preceeded by _its_ dependencies, and so forth).
+BrewDG allows you to visualize your homebrew package dependencies. It can also take a list of packages, and give you those packages, with each package preceeded by its dependencies (and its dependencies will be preceeded by _its_ dependencies, and so forth - see the [Example](#listing-stuff)).
 
 ## Installation
 
@@ -13,6 +13,8 @@ BrewDG allows you to visualize your homebrew package dependencies. It can also t
 ## Examples
 
 `brew_dg` is pretty slow since it's issuing and parsing the output of `brew` commands. Which is to say, you may want to have a beverage to sip while using it, particularly on a large number of packages.
+
+### Listing Stuff
 
 1. List packages plus their recommended dependencies. This is what compelled me to write `brew_dg`.
 
@@ -32,14 +34,18 @@ BrewDG allows you to visualize your homebrew package dependencies. It can also t
        mysql gdal autoconf automake libtool gpp postgis
    ```
 
-3. Visualize homebrew dependencies. See [Graph](#graph) for visual details. (Note that these visualizations require graphviz):
+### Visualizing Stuff
+
+**N.B.**: `brew_dg` uses `ruby-graphviz` to draw graphs, so you'll need to install graphviz first.
+
+1. Visualize homebrew dependencies. See [Graph](#graph) for visual details. (Note that these visualizations require graphviz):
 
     ```
     $ brew_dg -o library.png
     $ open library.png
     ```
 
-4. Visualize a package's recommended and required dependencies (as well as their dependencies)
+2. Visualize a package's recommended and required dependencies (as well as their dependencies)
 
     ```
     $ brew_dg -o postgis.png postgis
@@ -48,22 +54,20 @@ BrewDG allows you to visualize your homebrew package dependencies. It can also t
 
     [![](http://f.cl.ly/items/0i041b0u1F0e3n153Z1z/postgis.png)](http://f.cl.ly/items/3g2m3y2e150X1w2d263s/postgis.png)
 
-5. Visualize all of a package's dependencies, including Optional and Build dependencies
+3. Visualize all of a package's dependencies, including Optional and Build dependencies
 
   ```
   $ brew_dg -a -o postgis.png postgis
   $ open postgis.png
   ```
 
-## Installation
+## Man Page-ish
 
-`gem install brew_dg`
-
-## Synopsis
+### Synopsis
 
     brew_dg [options] [package package ...]
 
-## Description
+### Description
 
 Assuming for the moment that brew_dg is given no options, for each
 package given, brew_dg will display that package, along with its
@@ -90,13 +94,14 @@ preceeding description:
     -O [file]
         Draw inverted graph, and write it to file. Directed edges are read as
         "is a dependency of." If given a directory $DIR, the file will be
-        located at $DIR/library.png. See Graph section for stylistic details.
+        located at $DIR/library.png. See [Graph](#graph) section for stylistic
+        details.
 
     -t types
         Display only dependencies of the comma-delimited types specified. e.g.
         `-t Recommended,Optional'
 
-## Graph
+### Graph
 
 The graph uses edge and arrow styles to differentiate between dependency
 types.
