@@ -3,31 +3,7 @@ require 'graphviz'
 require 'plexus'
 
 module BrewDG
-  class Graph < Delegator
-
-    def self.taps(*methods)
-      methods.each do |method|
-        define_method(method) do |*args, &block|
-          tap { super(*args, &block) }
-        end
-      end
-    end
-
-    def self.shims(*methods)
-      methods.each do |method|
-        define_method(method) do |*args, &block|
-          self.class.new(super(*args, &block))
-        end
-      end
-    end
-
-    def initialize(graph = nil)
-      super
-      @graph = graph || Plexus::Digraph.new
-    end
-
-    taps :add_vertex!, :add_edge!, :add_edges!
-    shims :reversal
+  class Graph < ::Plexus::Digraph
 
     def visualization
       visualization = GraphViz.new(:G)
@@ -53,9 +29,6 @@ module BrewDG
         in_degree(vertex).zero? && out_degree(vertex).zero?
       end
     end
-
-    def __getobj__ ; @graph ; end
-    def __setobj__(new_graph) ; @graph = new_graph ; end
 
     private
    
