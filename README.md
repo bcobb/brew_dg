@@ -6,12 +6,14 @@ BrewDG allows you to visualize your homebrew package dependencies, and can give 
 
 ## Examples
 
-1. Add recommended packages to a homebrew stack:
+1. List packages plus their recommended dependencies. This is what compelled me to write `brew_dg`.
 
     ```
     $ brew_dg git postgresql sqlite redis
     > git readline ossp-uuid postgresql sqlite redis
     ```
+
+    ossp-uuid is recommended for postgresql, readline is recommended for sqlite. Note that readline is required for postgresql; it seems like it would be interesting to factor that into the final list of packages.
 
 2. Visualize homebrew dependencies (requires graphviz, and a bit of time):
 
