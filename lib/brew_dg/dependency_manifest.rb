@@ -21,7 +21,11 @@ module BrewDG
         if manifest_parts.size == 2
           manifest_body = manifest_parts.last
           dependencies = manifest_body.split(', ').map do |dependency|
-            dependency.scan(/\w|\s|-|_/).join.strip
+            dependency.strip.each_char.to_a.tap do |characters|
+              if characters.last(2).map(&:strip).any?(&:empty?)
+                characters.pop
+              end
+            end.join.strip
           end
         else
           dependencies = []

@@ -6,7 +6,7 @@ module BrewDG
     it "can determine a package's build dependencies" do
       manifests = DependencyManifest.for_package('postgis')
 
-      known_build_dependencies = %w(automake libtool gpp)
+      known_build_dependencies = %w(autoconf automake libtool gpp)
       build_manifest = manifests.find { |manifest| manifest.type == :build }
       build_dependencies = build_manifest.dependencies
 
